@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import UserView from "./components/UserView";
+import { ServicesProvider } from "./contexts/ServicesContext";
+import { UserIdProvider } from "./contexts/UserIdContext";
+import UserService from "./services/userService";
+import "./styles.css";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ServicesProvider
+        services={{
+          userService: new UserService()
+        }}
+      >
+        <UserIdProvider>
+          <UserView />
+        </UserIdProvider>
+      </ServicesProvider>
     </div>
   );
 }
-
-export default App;
